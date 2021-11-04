@@ -19,7 +19,6 @@ class AddressController extends Controller
      */
     public function index()
     {
-       
         $address = Address::paginate();
         return (new AddressCollection($address))->response();
     }
@@ -35,7 +34,7 @@ class AddressController extends Controller
         $validated = $request->validated();
         Address::create($request->all());
         Log::info("Address created successfully.");
-        return ;
+        return Response()->json(["result" => "Address created successfully."], 200);
     }
 
     /**
@@ -46,7 +45,7 @@ class AddressController extends Controller
      */
     public function show(Address $address)
     {
-            return (new AddressResource($address))->response();
+        return (new AddressResource($address))->response();
     }
 
     /**
@@ -60,7 +59,8 @@ class AddressController extends Controller
     {
         $validated = $request->validated();
         $address->update($request->all());
-        Log::info("address updated successfully");
+        Log::info("Address updated successfully");
+        return Response()->json(["result" => "Address updated successfully"], 200);
     }
 
     /**
