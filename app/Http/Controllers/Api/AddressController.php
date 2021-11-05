@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Resources\AddressCollection;
 use App\Http\Resources\AddressResource;
+use App\Http\Resources\CityResource;
+use App\Models\City;
 use Illuminate\Support\Facades\Log;
 
 class AddressController extends Controller
@@ -19,8 +21,10 @@ class AddressController extends Controller
      */
     public function index()
     {
-        $address = Address::paginate();
-        return (new AddressCollection($address))->response();
+        
+        $address = Address::with("city");
+       
+        return (new AddressCollection($address->paginate(10)))->response();
     }
 
     /**
@@ -45,7 +49,8 @@ class AddressController extends Controller
      */
     public function show(Address $address)
     {
-        return (new AddressResource($address))->response();
+
+       return (new AddressResource($address->loadMissing(["city"])))->response();
     }
 
     /**

@@ -9,8 +9,13 @@ class City extends Model
 {
     use HasFactory;
     protected $table = "cities";
+    protected $hidden = ["created_at", "updated_at"];
     protected $fillable = [
         'state',
         'city',
     ];
+
+    public function address(){
+        return $this->hasMany(Address::class);
+    }
 }
