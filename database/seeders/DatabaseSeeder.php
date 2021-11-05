@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            CitySeeder::class
+            CitySeeder::class,
+            AddressSeed::class
         ]);
         // \App\Models\User::factory(10)->create();
     }

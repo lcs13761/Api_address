@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::prefix("/")->group(function() {
+Route::prefix("/address")->group(function() {
 
-    Route::get("/address",[AddressController::class,"index"]);
-    Route::post("address/store",[AddressController::class,"store"]);
-    Route::get("/address/{address}",[AddressController::class,"show"]);
+    Route::get("/",[AddressController::class,"index"]);
+    Route::post("/store",[AddressController::class,"store"]);
+    Route::get("/{address}",[AddressController::class,"show"]);
     Route::put("/update/{address}",[AddressController::class,"update"]);
     Route::delete("/delete/{address}",[AddressController::class,"destroy"]);
 

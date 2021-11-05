@@ -21,9 +21,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        
         $address = Address::with("city");
-       
         return (new AddressCollection($address->paginate(10)))->response();
     }
 
@@ -50,7 +48,7 @@ class AddressController extends Controller
     public function show(Address $address)
     {
 
-       return (new AddressResource($address->loadMissing(["city"])))->response();
+        return (new AddressResource($address->loadMissing(["city"])))->response();
     }
 
     /**
@@ -77,5 +75,7 @@ class AddressController extends Controller
     public function destroy(Address $address)
     {
         $address->delete();
+        Log::info("Address deleted successfully");
+        return Response()->json(["result" => "Address deleted successfully"], 200);
     }
 }
